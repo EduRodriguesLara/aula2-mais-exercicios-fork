@@ -12,6 +12,8 @@
 
 class Aplicativo:
     def __init__(self, nome, consumo_bateria):
+        self.nome = nome
+        self.consumo_bateria = consumo_bateria
         pass
 
 
@@ -22,9 +24,52 @@ class Celular:
         self.bateria = bateria
         self.ligado = False
 
+    def checar(self):
+        print(f"Fabricante: {self.marca}\nModelo: {self.modelo}\nBateria: {self.bateria}\nStatus: {self.ligado}")
+        
+    def recarregar(self, porcentagem):
+        self.bateria += porcentagem
+        if self.bateria < 100:
+            print(f"Celular carregado, Bateria atual é de {self.bateria}%.")
+        if self.bateria >= 100:
+            self.bateria = 100
+            print(f"Celular carregado, Bateria atual é de {self.bateria}%.")
+
     def ligar(self):
-        self.ligado = True
-        print(f"O {self.marca} {self.modelo} foi ligado.")
+        if self.bateria <= 0:
+            print("Carga insuficiente, Recarregue antes de ligar.")
+        if self.bateria > 0:
+            self.ligado = True
+            print(f"O {self.marca} {self.modelo} foi ligado.")
 
     def executar_app(self, app):
-        pass
+        if self.ligado == False:
+            print("Ligue o celular primeiro..")
+        if self.ligado == True:
+            if self.bateria < app.consumo_bateria:
+                print("Bateria insuficiente, recarregue o dispositivo urgentemente senão você sera executado pela apple")
+            if self.bateria >= app.consumo_bateria:
+                print(f"O {self.modelo} executou {app.nome}, {app.consumo_bateria}% de bateria gasta.")
+                self.bateria -= app.consumo_bateria
+                if self.bateria <= 0:
+                    self.ligado = False
+                pass
+
+
+telefone_celular = Celular("Apple", "Iphone 6s")
+aplicativo_1 = Aplicativo("Fortune Tiger", 25)
+aplicativo_2 = Aplicativo("Genshin Impact", 50)
+
+telefone_celular.checar()
+telefone_celular.ligar()
+telefone_celular.checar()
+
+telefone_celular.executar_app(aplicativo_1)
+telefone_celular.checar()
+telefone_celular.executar_app(aplicativo_1)
+telefone_celular.checar()
+telefone_celular.executar_app(aplicativo_2)
+telefone_celular.checar()
+
+telefone_celular.recarregar(25)
+telefone_celular.checar()
