@@ -18,7 +18,7 @@ class Livro:
 
 
 livro_1 = Livro("Demon Slayer Volume 17", "Koyoharu Gotouge", 192)
-livro_2 = Livro("O Pequeno Principe", "Antoine de Saint-Exupéry", 140)
+livro_2 = Livro("O Pequeno Principe", "Antoine de Saint-Exupéry", 138)
 
 print(livro_1)
 print(livro_2)
